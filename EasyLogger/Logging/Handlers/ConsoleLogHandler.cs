@@ -6,15 +6,20 @@ namespace EasyLogger.Logging.Handlers
 {
     public class ConsoleLogHandler : ILogHandler
     {
-        public ConsoleLogHandler()
+        public ConsoleLogHandler() : this(new DefaultLogFormatter())
         {
             
+        }
+
+        public ConsoleLogHandler(ILogFormatter formatter)
+        {
+            Formatter = formatter;
         }
         
         /// <summary>
         /// Log Formatter
         /// </summary>
-        public ILogFormatter Formatter { get; } = new DefaultLogFormatter();
+        public ILogFormatter Formatter { get; }
 
         public void Log(LogMessage message)
         {

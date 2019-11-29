@@ -6,15 +6,20 @@ namespace EasyLogger.Logging.Handlers
 {
     public class DebugLogHandler : ILogHandler
     {
-        public DebugLogHandler()
+        public DebugLogHandler() : this(new DefaultLogFormatter())
         {
             
+        }
+
+        public DebugLogHandler(ILogFormatter formatter)
+        {
+            Formatter = formatter;
         }
         
         /// <summary>
         /// Log Formatter
         /// </summary>
-        public ILogFormatter Formatter { get; } = new DefaultLogFormatter();
+        public ILogFormatter Formatter { get; }
 
         public void Log(LogMessage message)
         {
