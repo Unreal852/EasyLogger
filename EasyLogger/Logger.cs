@@ -15,54 +15,38 @@ namespace EasyLogger
         /// <summary>
         /// Default log level
         /// </summary>
-        public LogLevel DefaultLevel { get; set; } = LogLevel.Info;
+        public LogLevel DefaultLogLevel { get; set; } = LogLevel.Info;
 
         /// <summary>
         /// Default header
         /// </summary>
-        public string DefaultHeader { get; set; } = "Logger/";
+        public string Header { get; set; } = "Logger/";
 
         /// <summary>
         /// If set to false, logging will be disabled
         /// </summary>
         public bool Enabled { get; set; } = true;
 
-        /// <summary>
-        /// Enable logger
-        /// </summary>
-        public void On()
+        public void Log(string message)
         {
-            Enabled = true;
+            Log(DefaultLogLevel, message, Header, null);
         }
 
-        /// <summary>
-        /// Disable logger
-        /// </summary>
-        public void Off()
+        public void Log(LogLevel level, string message)
         {
-            Enabled = false;
+            Log(level, message, Header, null);
         }
 
-        public void Log(string message, string header = null)
+        public void Log(Exception ex)
         {
-            Log(DefaultLevel, message, header ?? DefaultHeader, null);
-        }
-
-        public void Log(LogLevel level, string message, string header = null)
-        {
-            Log(level, message, header ?? DefaultHeader, null);
-        }
-
-        public void Log(Exception ex, string header = null)
-        {
-            Log(LogLevel.Error, $"{ex.Message} {Environment.NewLine} {ex.StackTrace}", header ?? DefaultHeader, null);
+            Log(LogLevel.Error, $"{ex.Message} {Environment.NewLine} {ex.StackTrace}", Header, null);
         }
 
         public void Log(LogLevel level, string message, string header, params (string Key, string Value)[] additionalValues)
         {
             if(!Enabled)
                 return;
-            LogMessage logMsg = new LogMessage(level, message, DateTime.Now, header ?? DefaultHeader);
+            LogMessage logMsg = new LogMessage(level, message, DateTime.Now, header ?? Header);
             if(additionalValues != null)
             {
                 foreach((string Key, string Value) values in additionalValues)
