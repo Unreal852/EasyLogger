@@ -6,7 +6,7 @@
         {
         }
 
-        public string Format(LogMessage message) //Todo: benchmark vs string.Format
+        public string Format(LogMessage message)
         {
             return $"[{message.Date:T}] [{message.Header}{message.Level}] > {message.Message}";
         }

@@ -15,7 +15,7 @@ namespace EasyLogger
         /// <summary>
         /// Default log level
         /// </summary>
-        public LogLevel DefaultLogLevel { get; set; } = LogLevel.Info;
+        public ELogLevel DefaultLogLevel { get; set; } = ELogLevel.Info;
 
         /// <summary>
         /// Default header
@@ -32,27 +32,22 @@ namespace EasyLogger
             Log(DefaultLogLevel, message, Header, null);
         }
 
-        public void Log(LogLevel level, string message)
+        public void Log(ELogLevel level, string message)
         {
             Log(level, message, Header, null);
         }
 
         public void Log(Exception ex)
         {
-            Log(LogLevel.Error, $"{ex.Message} {Environment.NewLine} {ex.StackTrace}", Header, null);
+            Log(ELogLevel.Error, $"{ex.Message} {Environment.NewLine} {ex.StackTrace}", Header, null);
         }
 
-        public void Log(LogLevel level, string message, string header, params (string Key, string Value)[] additionalValues)
+        public void Log(ELogLevel level, string message, string header, params (string Key, string Value)[] additionalValues)
         {
             if(!Enabled)
                 return;
             LogMessage logMsg = new LogMessage(level, message, DateTime.Now, header ?? Header);
-            if(additionalValues != null)
-            {
-                foreach((string Key, string Value) values in additionalValues)
-                    logMsg.AddStringValue(values.Key, values.Value);
-            }
-
+            logMsg.AddStringValues(additionalValues);
             HandlersManager.Log(logMsg);
         }
     }

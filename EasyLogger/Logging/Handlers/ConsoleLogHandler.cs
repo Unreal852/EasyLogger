@@ -25,25 +25,25 @@ namespace EasyLogger.Logging.Handlers
         {
             switch(message.Level)
             {
-                case LogLevel.None:
+                case ELogLevel.None:
                     WriteLine(Formatter.Format(message));
                     return;
-                case LogLevel.Debug:
+                case ELogLevel.Debug:
                     WriteLine(Formatter.Format(message), ConsoleColor.Cyan);
                     return;
-                case LogLevel.Fine:
+                case ELogLevel.Fine:
                     WriteLine(Formatter.Format(message), ConsoleColor.Green);
                     return;
-                case LogLevel.Info:
+                case ELogLevel.Info:
                     WriteLine(Formatter.Format(message), ConsoleColor.DarkGreen);
                     return;
-                case LogLevel.Warning:
+                case ELogLevel.Warning:
                     WriteLine(Formatter.Format(message), ConsoleColor.Yellow);
                     return;
-                case LogLevel.Error:
+                case ELogLevel.Error:
                     WriteLine(Formatter.Format(message), ConsoleColor.Red);
                     return;
-                case LogLevel.Severe:
+                case ELogLevel.Severe:
                     WriteLine(Formatter.Format(message), ConsoleColor.DarkRed);
                     return;
                 default:

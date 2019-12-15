@@ -5,7 +5,7 @@ namespace EasyLogger
 {
     public class LogMessage
     {
-        public LogMessage(LogLevel level, string message, DateTime date, string messageHeader = null)
+        public LogMessage(ELogLevel level, string message, DateTime date, string messageHeader = null)
         {
             Level = level;
             Message = message;
@@ -16,7 +16,7 @@ namespace EasyLogger
         /// <summary>
         /// Log Level
         /// </summary>
-        public LogLevel Level { get; }
+        public ELogLevel Level { get; }
         
         /// <summary>
         /// Log Message
@@ -51,13 +51,22 @@ namespace EasyLogger
         }
 
         /// <summary>
+        /// Add additional string values
+        /// </summary>
+        /// <param name="values">Values</param>
+        public void AddStringValues(params (string Key, string Value)[] values)
+        {
+            if (values == null)
+                return;
+            for(int i = 0; i < values.Length; i++)
+                AdditionalValues.Add(values[i].Key, values[i].Value);
+        }
+
+        /// <summary>
         /// Get string value from additional values
         /// </summary>
         /// <param name="key">Key</param>
-        public string this[string key]
-        {
-            get => AdditionalValues.ContainsKey(key) ? AdditionalValues[key] : default(string);
-        }
+        public string this[string key] => AdditionalValues.ContainsKey(key) ? AdditionalValues[key] : default;
 
         /// <summary>
         /// Remove string from additional values
