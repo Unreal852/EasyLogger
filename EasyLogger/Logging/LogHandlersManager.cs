@@ -53,10 +53,10 @@ namespace EasyLogger.Logging
 
         public void Log(LogMessage message)
         {
-            if(StoreMessages)
-                StoredMessages.Add(message);
             foreach(ILogHandler logHandler in Handlers)
                 logHandler.Log(message);
+            if(StoreMessages)
+                StoredMessages.Add(message);
         }
     }
 }
