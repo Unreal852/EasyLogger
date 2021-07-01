@@ -16,7 +16,7 @@ namespace EasyLogger
         /// </summary>
         /// <param name="level">Log Level</param>
         /// <param name="message">Message to log</param>
-        public void Log(ELogLevel level, string message);
+        public void Log(LogLevel level, string message);
 
         /// <summary>
         /// Log an exception.
@@ -31,7 +31,7 @@ namespace EasyLogger
         /// <param name="message">Message to log</param>
         /// <param name="header">Log Header</param>
         /// <param name="additionalValues">Additional Values</param>
-        public void Log(ELogLevel level, string message, string header,
-            params (string Key, string Value)[] additionalValues);
+        public void Log(LogLevel level, string message, string header,
+            params (string Key, object Value)[] additionalValues);
     }
 }

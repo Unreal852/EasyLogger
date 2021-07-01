@@ -4,6 +4,9 @@ using EasyLogger.Format.Formatters;
 
 namespace EasyLogger.Logging.Handlers
 {
+    /// <summary>
+    /// Provide a basic debug logger (<see cref="ILogHandler"/>) implementation.
+    /// </summary>
     public class DebugLogHandler : ILogHandler
     {
         public DebugLogHandler() : this(new DefaultLogFormatter())

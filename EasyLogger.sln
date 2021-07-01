@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyLogger", "EasyLogger\EasyLogger.csproj", "{FF7D209E-F57A-4B4B-91D5-77BB8098A2DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyLogger.Sample", "EasyLogger.Sample\EasyLogger.Sample.csproj", "{65C77C6D-3E61-4D4B-98FF-9D31C2BA4DB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{FF7D209E-F57A-4B4B-91D5-77BB8098A2DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF7D209E-F57A-4B4B-91D5-77BB8098A2DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF7D209E-F57A-4B4B-91D5-77BB8098A2DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65C77C6D-3E61-4D4B-98FF-9D31C2BA4DB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65C77C6D-3E61-4D4B-98FF-9D31C2BA4DB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65C77C6D-3E61-4D4B-98FF-9D31C2BA4DB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65C77C6D-3E61-4D4B-98FF-9D31C2BA4DB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

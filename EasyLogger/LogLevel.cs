@@ -3,7 +3,7 @@
     /// <summary>
     /// Log Level
     /// </summary>
-    public enum ELogLevel
+    public enum LogLevel
     {
         None,
         Debug,

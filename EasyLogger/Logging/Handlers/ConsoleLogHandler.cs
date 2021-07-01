@@ -4,6 +4,9 @@ using EasyLogger.Format.Formatters;
 
 namespace EasyLogger.Logging.Handlers
 {
+    /// <summary>
+    /// Provide a basic console logger (<see cref="ILogHandler"/>) implementation.
+    /// </summary>
     public class ConsoleLogHandler : ILogHandler
     {
         public ConsoleLogHandler() : this(new DefaultLogFormatter())
@@ -25,25 +28,25 @@ namespace EasyLogger.Logging.Handlers
         {
             switch(message.Level)
             {
-                case ELogLevel.None:
+                case LogLevel.None:
                     WriteLine(Formatter.Format(message));
                     return;
-                case ELogLevel.Debug:
+                case LogLevel.Debug:
                     WriteLine(Formatter.Format(message), ConsoleColor.Cyan);
                     return;
-                case ELogLevel.Fine:
+                case LogLevel.Fine:
                     WriteLine(Formatter.Format(message), ConsoleColor.Green);
                     return;
-                case ELogLevel.Info:
+                case LogLevel.Info:
                     WriteLine(Formatter.Format(message), ConsoleColor.DarkGreen);
                     return;
-                case ELogLevel.Warning:
+                case LogLevel.Warning:
                     WriteLine(Formatter.Format(message), ConsoleColor.Yellow);
                     return;
-                case ELogLevel.Error:
+                case LogLevel.Error:
                     WriteLine(Formatter.Format(message), ConsoleColor.Red);
                     return;
-                case ELogLevel.Severe:
+                case LogLevel.Severe:
                     WriteLine(Formatter.Format(message), ConsoleColor.DarkRed);
                     return;
                 default:
@@ -56,7 +59,7 @@ namespace EasyLogger.Logging.Handlers
         /// </summary>
         /// <param name="message">Message</param>
         /// <param name="color">Message Color</param>
-        private void WriteLine(string message, ConsoleColor color = ConsoleColor.White)
+        private static void WriteLine(string message, ConsoleColor color = ConsoleColor.White)
         {
             Console.ForegroundColor = color;
             Console.WriteLine(message);

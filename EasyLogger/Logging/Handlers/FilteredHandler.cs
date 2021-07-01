@@ -2,6 +2,9 @@
 
 namespace EasyLogger.Logging.Handlers
 {
+    /// <summary>
+    /// Provide a basic <see cref="LogMessage"/> filter.
+    /// </summary>
     public class FilteredHandler : ILogHandler
     {
         public FilteredHandler(ILogHandler handler, Predicate<LogMessage> filter)
@@ -16,7 +19,7 @@ namespace EasyLogger.Logging.Handlers
 
         public void Log(LogMessage message)
         {
-            if(Filter(message))
+            if (Filter(message))
                 Handler.Log(message);
         }
     }

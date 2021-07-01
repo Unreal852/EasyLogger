@@ -5,73 +5,62 @@ using EasyLogger.Format.Formatters;
 
 namespace EasyLogger.Logging.Handlers
 {
+    /// <summary>
+    /// Provide a basic file logger (<see cref="ILogHandler"/>) implementation.
+    /// </summary>
     public class FileLogHandler : ILogHandler
     {
-        public FileLogHandler() : this(CreateFileName())
+        public FileLogHandler() : this(new DefaultLogFormatter())
         {
-            
-        }
-
-        public FileLogHandler(string fileName) : this(fileName, string.Empty)
-        {
-            
-        }
-
-        public FileLogHandler(string fileName, string directory) : this(new DefaultLogFormatter(), fileName, directory)
-        {
-            
         }
 
         public FileLogHandler(ILogFormatter loggerFormatter) : this(loggerFormatter, CreateFileName())
         {
-            
         }
 
-        public FileLogHandler(ILogFormatter loggerFormatter, string fileName) : this(loggerFormatter, fileName,
-            string.Empty)
+        public FileLogHandler(ILogFormatter loggerFormatter, string directory) : this(loggerFormatter, CreateFileName(), directory)
         {
-            
         }
 
         public FileLogHandler(ILogFormatter loggerFormatter, string fileName, string directory)
         {
             Formatter = loggerFormatter;
-            FileName = fileName;
-            Directory = string.IsNullOrEmpty(directory) ? new DirectoryInfo(Path.Combine(directory)) : new DirectoryInfo(directory);
-            if(!Directory.Exists)
+            Directory = new DirectoryInfo(string.IsNullOrWhiteSpace(directory) ? Environment.CurrentDirectory : directory);
+            if (!Directory.Exists)
                 Directory.Create();
+            File = new FileInfo(Path.Combine(Directory.FullName, fileName));
         }
-        
+
         /// <summary>
         /// Formatter
         /// </summary>
         private ILogFormatter Formatter { get; }
-        
+
         /// <summary>
         /// Directory
         /// </summary>
         private DirectoryInfo Directory { get; }
-        
+
         /// <summary>
-        /// File Name
+        /// File
         /// </summary>
-        private string FileName { get; }
+        public FileInfo File { get; }
 
         public void Log(LogMessage logMessage)
         {
-            using StreamWriter writer = new StreamWriter(File.Open(Path.Combine(Directory.FullName, FileName), FileMode.Append));
+            using var writer = new StreamWriter(File.Open(FileMode.Append));
             writer.WriteLine(Formatter.Format(logMessage));
         }
-        
+
         /// <summary>
         /// Generate File Name
         /// </summary>
-        /// <returns></returns>
+        /// <returns>File Name</returns>
         private static string CreateFileName()
         {
             DateTime currentDate = DateTime.Now;
-            Guid guid = Guid.NewGuid();
-            return $"Log_{currentDate.Year:0000}{currentDate.Month:00}{currentDate.Day:00}-{currentDate.Hour:00}{currentDate.Minute:00}_{guid}.log";
+            var guid = Guid.NewGuid();
+            return $"Log_{currentDate.Year:0000}.{currentDate.Month:00}.{currentDate.Day:00}-{currentDate.Hour:00}.{currentDate.Minute:00}_{guid}.log";
         }
     }
 }
